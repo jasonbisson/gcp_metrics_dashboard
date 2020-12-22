@@ -5,7 +5,7 @@ This repository aims to provide a project dashboard and notification channel to 
 
 ### Terraform plugins
 - [Terraform](https://www.terraform.io/downloads.html) 0.12.x
-- [terraform-provider-google](https://github.com/terraform-providers terraform-provider-google) plugin v3.51.0
+- [terraform-provider-google](https://github.com/terraform-providers/terraform-provider-google) plugin v3.51.0
 - [terraform-provider-google-beta](https://github.com/terraform-providers/terraform-provider-google-beta) plugin v3.51.0
 
 
@@ -15,8 +15,6 @@ The following APIs must be enabled in the project:
 - Monitoring: `monitoring.googleapis.com`
 
 ### Service account
-***Terraform service account** (that will create the Monitoring infrastructure)
-
 The **Terraform service account** used to run this module must have the following IAM Roles:
 - `Logging Admin` 
 
@@ -72,7 +70,7 @@ The project has the following folders and files:
 - export project_id=$(gcloud config list --format 'value(core.project)')
 
 #### Create Service account for Terraform deployment
-
+- ~/gcp_service_accounts/create_account.sh environment
 
 #### Update IAM Permissions for student account & service account 
 - export role="iam.serviceAccountTokenCreator"
@@ -80,10 +78,10 @@ The project has the following folders and files:
 - gcloud projects add-iam-policy-binding $project_id --member 'serviceAccount:'${environment}'@'${project_id}'.iam.gserviceaccount.com' --role 'roles/owner'
 
 #### Deploy Monitoring dashboard
-
+- ~/gcp_terraform_deployment/terraform_workflow_token.sh --terraform_service_account shortname_terraform_deployment_service_account --terraform_action plan,apply,destroy
 
 #### Analysis of Terraform deployment permissions
 - git clone https://github.com/jasonbisson/gcp_iam_least_privilege.git
-- find_iam_permissions.sh --email <Terraform service account email> --days 1
+- find_iam_permissions.sh --email Terraform service account email --days 1
 
 
