@@ -55,23 +55,21 @@ The project has the following folders and files:
 - git clone https://github.com/jasonbisson/gcp_terraform_deployment.git
 
 #### Monitoring Dashboard
-- export environment=your environment name
-- mkdir $environment
-- cd $environment
 - git clone https://github.com/jasonbisson/gcp_metrics_dashboard.git
 
 ### Deployment Environment 
 
 #### Cloud Shell environment variables & state bucket
+- export environment=metrics
 - export project_id=$(gcloud config list --format 'value(core.project)')
 - gsutil mb gs://$project_id-state
-- export terraform_module=$HOME/$environment
-- export terraform_module_config=$HOME/$environment/terraform.tfvars
+- export terraform_module=$HOME/gcp_metrics_dashboard
+- export terraform_module_config=$HOME/gcp_metrics_dashboard/terraform.tfvars
 - export terraform_deployment_name=$environment
 - export project_id=$(gcloud config list --format 'value(core.project)')
 
 #### Create Service account for Terraform deployment
-- ~/gcp_service_accounts/create_account.sh environment
+- ~/gcp_service_accounts/create_account.sh $environment
 
 #### Update IAM Permissions for student account & service account 
 - export role="iam.serviceAccountTokenCreator"
@@ -85,6 +83,6 @@ The project has the following folders and files:
 
 #### Analysis of Terraform deployment permissions
 - git clone https://github.com/jasonbisson/gcp_iam_least_privilege.git
-- find_iam_permissions.sh --email Terraform service account email --days 1
+- ~/gcp_iam_least_privilege/find_iam_permissions.sh --email Terraform service account email --days 1
 
 
