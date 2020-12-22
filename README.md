@@ -77,9 +77,11 @@ The project has the following folders and files:
 - export role="iam.serviceAccountTokenCreator"
 - gcloud projects add-iam-policy-binding $project_id --member user:$(gcloud auth list --format 'value(account)') --role roles/${role}
 - gcloud projects add-iam-policy-binding $project_id --member 'serviceAccount:'${environment}'@'${project_id}'.iam.gserviceaccount.com' --role 'roles/owner'
+- Wait couple minutes for IAM policy update
 
 #### Deploy Monitoring dashboard
-- ~/gcp_terraform_deployment/terraform_workflow_token.sh --terraform_service_account shortname_terraform_deployment_service_account --terraform_action plan,apply,destroy
+- ~/gcp_terraform_deployment/terraform_workflow_token.sh --terraform_service_account $environment --terraform_action plan
+- ~/gcp_terraform_deployment/terraform_workflow_token.sh --terraform_service_account $environment --terraform_action apply
 
 #### Analysis of Terraform deployment permissions
 - git clone https://github.com/jasonbisson/gcp_iam_least_privilege.git
