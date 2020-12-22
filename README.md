@@ -49,40 +49,57 @@ The project has the following folders and files:
 ### Download deployment code in Cloud Shell
 
 #### Terraform Service Account 
-- git clone https://github.com/jasonbisson/gcp_service_accounts.git
+```text
+git clone https://github.com/jasonbisson/gcp_service_accounts.git
+```
 
 #### Terraform Deployment script
-- git clone https://github.com/jasonbisson/gcp_terraform_deployment.git
+```text
+git clone https://github.com/jasonbisson/gcp_terraform_deployment.git
+```
 
 #### Monitoring Dashboard
-- git clone https://github.com/jasonbisson/gcp_metrics_dashboard.git
+```text
+git clone https://github.com/jasonbisson/gcp_metrics_dashboard.git
+```
 
 ### Deployment Environment 
 
 #### Cloud Shell environment variables & state bucket
-- export environment=metrics
-- export project_id=$(gcloud config list --format 'value(core.project)')
-- gsutil mb gs://$project_id-state
-- export terraform_module=$HOME/gcp_metrics_dashboard
-- export terraform_module_config=$HOME/gcp_metrics_dashboard/terraform.tfvars
-- export terraform_deployment_name=$environment
-- export project_id=$(gcloud config list --format 'value(core.project)')
+```text
+export environment=metrics
+export project_id=$(gcloud config list --format 'value(core.project)')
+gsutil mb gs://$project_id-state
+export terraform_module=$HOME/gcp_metrics_dashboard
+export terraform_module_config=$HOME/gcp_metrics_dashboard/terraform.tfvars
+export terraform_deployment_name=$environment
+export project_id=$(gcloud config list --format 'value(core.project)')
+```
 
 #### Create Service account for Terraform deployment
-- ~/gcp_service_accounts/create_account.sh $environment
+```text
+~/gcp_service_accounts/create_account.sh $environment
+```
 
 #### Update IAM Permissions for student account & service account 
-- export role="iam.serviceAccountTokenCreator"
-- gcloud projects add-iam-policy-binding $project_id --member user:$(gcloud auth list --format 'value(account)') --role roles/${role}
-- gcloud projects add-iam-policy-binding $project_id --member 'serviceAccount:'${environment}'@'${project_id}'.iam.gserviceaccount.com' --role 'roles/owner'
-- Wait couple minutes for IAM policy update
+```text
+export role="iam.serviceAccountTokenCreator"
+gcloud projects add-iam-policy-binding $project_id --member user:$(gcloud auth list --format 'value(account)') --role roles/${role}
+gcloud projects add-iam-policy-binding $project_id --member 'serviceAccount:'${environment}'@'${project_id}'.iam.gserviceaccount.com' --role 'roles/owner'
+Wait couple minutes for IAM policy update
+```
 
 #### Deploy Monitoring dashboard
-- ~/gcp_terraform_deployment/terraform_workflow_token.sh --terraform_service_account $environment --terraform_action plan
-- ~/gcp_terraform_deployment/terraform_workflow_token.sh --terraform_service_account $environment --terraform_action apply
+```text
+~/gcp_terraform_deployment/terraform_workflow_token.sh --terraform_service_account $environment --terraform_action plan
+~/gcp_terraform_deployment/terraform_workflow_token.sh --terraform_service_account $environment --terraform_action apply
+```
 
 #### Analysis of Terraform deployment permissions
-- git clone https://github.com/jasonbisson/gcp_iam_least_privilege.git
-- ~/gcp_iam_least_privilege/find_iam_permissions.sh --email Terraform service account email --days 1
+```text
+git clone https://github.com/jasonbisson/gcp_iam_least_privilege.git
+~/gcp_iam_least_privilege/find_iam_permissions.sh --email Terraform service account email --days 1
+```
+
 
 
