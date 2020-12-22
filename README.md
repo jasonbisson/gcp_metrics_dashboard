@@ -17,6 +17,7 @@ The following APIs must be enabled in the project:
 ### Service account
 The **Terraform service account** used to run this module must have the following IAM Roles:
 - `Logging Admin` 
+- `Monitoring Admin`
 
 ## Install
 
@@ -54,7 +55,7 @@ The project has the following folders and files:
 - git clone https://github.com/jasonbisson/gcp_terraform_deployment.git
 
 #### Monitoring Dashboard
-- export environment=<your environment name>
+- export environment=your environment name
 - mkdir $environment
 - cd $environment
 - git clone https://github.com/jasonbisson/gcp_metrics_dashboard.git
