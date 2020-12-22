@@ -43,6 +43,7 @@ The project has the following folders and files:
 - /variables.tf: all the variables for the module
 - /terraform.tfvars.template template of required variables
 - /readme.MD: this file
+- /audit.evtns.csv List of log events I'm working on to monitoring (work in progress)
 
 ## Qwiklabs deployment example
 
