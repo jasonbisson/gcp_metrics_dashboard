@@ -68,8 +68,6 @@ resource "google_monitoring_alert_policy" "alert-policy-email" {
     }
   }
 
-  notification_channels = [
-    "${google_monitoring_notification_channel.email.name}",
+  notification_channels = ["${google_monitoring_notification_channel.email.name}"]
     enabled = "true"
-  ]
 }
