@@ -1,3 +1,18 @@
+/**
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 
 terraform {
   required_version = ">= 0.12"
@@ -34,6 +49,7 @@ resource "google_logging_metric" "metric" {
     value_type   = "INT64"
     display_name = "${var.metric_display_name}"
   }
+  depends_on   = ["google_project_service.project_services"]
 }
 
 resource "google_monitoring_notification_channel" "email" {
@@ -44,6 +60,7 @@ resource "google_monitoring_notification_channel" "email" {
   labels = {
     email_address = "${var.notification_email_address}"
   }
+  depends_on   = ["google_project_service.project_services"]
 }
 
 resource "google_monitoring_alert_policy" "alert-policy-email" {
@@ -69,4 +86,5 @@ resource "google_monitoring_alert_policy" "alert-policy-email" {
 
   notification_channels = ["${google_monitoring_notification_channel.email.name}"]
     enabled = "true"
+  depends_on   = ["google_project_service.project_services"]
 }

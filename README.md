@@ -102,5 +102,7 @@ git clone https://github.com/jasonbisson/gcp_iam_least_privilege.git
 ~/gcp_iam_least_privilege/find_iam_permissions.sh --email Terraform service account email --days 1
 ```
 
-
-
+### Just give me script
+```text
+qwiklabs_metrics.sh
+``` 
