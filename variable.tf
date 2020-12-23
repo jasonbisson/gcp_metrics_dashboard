@@ -14,6 +14,11 @@ variable "notification_email_address" {
   type = "string"
 }
 
+variable "enable_apis" {
+  description = "Whether to actually enable the APIs. If false, this module is a no-op."
+  default     = "true"
+}
+
 variable "activate_apis" {
   description = "The list of apis to activate within the project"
   default     = ["logging.googleapis.com", "monitoring.googleapis.com"]
