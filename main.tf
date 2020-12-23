@@ -16,15 +16,15 @@ resource "google_project_service" "project_services" {
   disable_dependent_services = var.disable_dependent_services
 }
 
-resource "google_logging_metric" "log_alert_metric" {
-  for_each = {for item in local.logAlerts: item.name => item}
-  name   = each.value.name
-  filter = each.value.rule
-  metric_descriptor {
-    metric_kind = "DELTA"
-    value_type  = "INT64"
-  }
-}
+#resource "google_logging_metric" "log_alert_metric" {
+#  for_each = {for item in local.logAlerts: item.name => item}
+#  name   = each.value.name
+#  filter = each.value.rule
+#  metric_descriptor {
+#    metric_kind = "DELTA"
+#    value_type  = "INT64"
+#  }
+#}
 
 resource "google_logging_metric" "metric" {
   name   = "${var.metric_name}"
