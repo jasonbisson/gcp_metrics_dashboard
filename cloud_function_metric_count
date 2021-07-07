@@ -1,0 +1,1 @@
+          filter = format("metric.type=\"cloudfunctions.googleapis.com/function/execution_count\" AND resource.type=\"cloud_function\" AND metric.label.status!=\"ok\" AND resource.labels.function_name=\"%s\"",google_cloudfunctions_function.log-forwarding-function.name)
